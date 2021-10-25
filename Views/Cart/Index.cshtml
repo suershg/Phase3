@@ -1,0 +1,69 @@
+﻿@model IEnumerable<IdentitySecureApp.Models.ordersViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>CART</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SellerEmail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SellerEmail)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-area="" asp-controller="Products" asp-action="Index"> SHOP MORE</a>
+
+<br />
+<br />
+
+<div>
+   <pre> <input type="radio" name="debit" />Debit     <input type="radio" name="debit" />Credit     <input type="radio" name="debit" />Cash On Delivary</pre>
+</div>
+<button><a asp-area="" asp-controller="Cart" asp-action="Order"> PROCEED WITH ORDER</a></button>
+
+
+
+

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<IdentitySecureApp.Models.Tbllaptops>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Laptop Store</h1>
+@if (ViewBag.role == "Customer")
+{
+    <a><h3>Go to Cart</h3></a>
+}
+
+
+    @if (ViewBag.role == "Seller")
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+    @ViewBag.role
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Model)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        @if (ViewBag.role == "Seller")
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                | @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        }
+                        @if (ViewBag.role == "Customer")
+                        {
+                            <td>
+                                @Html.ActionLink("Add To Cart", "AddToCart", "Cart", new { id = item.Id })
+                            </td>
+
+                        }
+                    </tr>
+                }
+        </tbody>
+    </table>
